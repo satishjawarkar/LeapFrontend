@@ -1,6 +1,4 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import CustomerLayout from "../../layouts/CustomerLayout";
-import CustomerDashboard from "../../features/customer/pages/CustomerDashboard";
 import AdminLayout from "../../layouts/AdminLayout";
 import { LoginPage } from "../../features/auth/pages/LoginPage";
 import { HomePage } from "../../features/public/pages/HomePage";
@@ -8,17 +6,6 @@ import { SchemeSetupPage } from "../../features/Setup/SchemeSetupPage";
 import { SetupPlaceholderPage } from "../../features/Setup/SetupPlaceholderPage";
 
 export const router = createBrowserRouter([
-  {
-    path: "/customer",
-    element: <CustomerLayout />,
-    children: [
-      {
-        index: true,
-        element: <CustomerDashboard />,
-      },
-    ],
-  },
-
   {
     path: "/",
     element: <AdminLayout />,
