@@ -19,6 +19,7 @@ import {
   FormControl,
   FormMessage,
 } from "../../../components/ui/form";
+import { ForgotPasswordDialog } from "./ForgotPassword";
 
 const generateCaptcha = () => {
   const characters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
@@ -206,21 +207,10 @@ export function LoginForm() {
         />
 
         {/* OPTIONS */}
-        <div className="flex items-center justify-between gap-4 pt-1">
-          <Link
-            to="/forgot-password"
-            className="
-          text-sm
-          font-medium
-          text-primary
-          transition-colors
-          hover:text-primary/80
-          hover:underline
-        "
-          >
-            Forgot password?
-          </Link>
-        </div>
+       {/* OPTIONS */}
+<div className="flex items-center justify-between gap-4 pt-1">
+  <ForgotPasswordDialog />
+</div>
 
         {/* LOGIN BUTTON */}
         <Button
