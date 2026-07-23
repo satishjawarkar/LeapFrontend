@@ -51,11 +51,13 @@ export function HomePage() {
           Add Announcement
         </button>
       </div>
-      <div>
-        <DatePicker value={dob} onChange={setDob} maxDate={new Date()} />
-      </div>
+      
       <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div>
+            <label className="mb-1 block text-sm text-slate-600">DOB</label>
+        <DatePicker className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-500 focus:border-[#0669b2] focus:outline-none" value={dob} onChange={setDob} maxDate={new Date()} />
+      </div>
           <div>
             <label className="mb-1 block text-sm text-slate-600">
               Financial Year

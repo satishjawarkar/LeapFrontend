@@ -4,6 +4,7 @@ import { Popover } from "@base-ui/react/popover";
 import { Calendar } from "./Calendar";
 
 interface DatePickerProps {
+    className?:string
   value?: Date | null;
   onChange: (date: Date | null) => void;
   minDate?: Date;
@@ -36,7 +37,7 @@ function parseInputDate(text: string): Date | null {
   return date;
 }
 
-export function DatePicker({ value, onChange, minDate, maxDate, placeholder = "DD/MM/YYYY" }: DatePickerProps) {
+export function DatePicker({ className,value, onChange, minDate, maxDate, placeholder = "DD/MM/YYYY" }: DatePickerProps) {
   const [open, setOpen] = useState(false);
   const [inputText, setInputText] = useState(value ? formatForInput(value) : "");
   const [error, setError] = useState<string | null>(null);
@@ -84,18 +85,7 @@ export function DatePicker({ value, onChange, minDate, maxDate, placeholder = "D
           placeholder={placeholder}
           onChange={(e) => handleInputChange(e.target.value)}
           onFocus={() => setOpen(true)}
-          className={`
-            h-12
-            w-full
-            rounded-xl
-            border
-            bg-white
-            px-4
-            pr-10
-            text-sm
-            transition-all
-            focus:ring-2
-            focus:ring-primary/20
+          className={`${className}
             ${error ? "border-red-400" : "border-slate-300 focus:border-primary"}
           `}
         />
