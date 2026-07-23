@@ -3,7 +3,6 @@
 import * as React from "react";
 import {
   Controller,
-  useForm,
   FormProvider,
   useFormContext,
   useFormState,
@@ -94,13 +93,14 @@ function FormLabel({ className, ...props }: React.ComponentProps<"label">) {
   );
 }
 
-function FormControl({ ...props }: React.ComponentProps<"div">) {
+function FormControl({ children, ...props }: React.ComponentProps<"div">) {
   const { error, formItemId, formDescriptionId, formMessageId } =
     useFormField();
 
-  const child = React.Children.only(props.children) as React.ReactElement;
+  const child = React.Children.only(children) as React.ReactElement<any>;
 
   return React.cloneElement(child, {
+    ...props,
     id: formItemId,
     "aria-describedby": error
       ? `${formDescriptionId} ${formMessageId}`

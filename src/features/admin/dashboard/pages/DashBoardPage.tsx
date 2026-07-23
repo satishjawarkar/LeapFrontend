@@ -1,6 +1,3 @@
-import { DashboardBottom } from "../components/DashboardBottom";
-import { DashboardCharts } from "../components/DashboardChart";
-import { StatsGrid } from "../components/StatGRid";
 import { useDashboard } from "../hooks/userDashboard";
 // import { useDashboard } from "../hooks/userDAshboard";
 
@@ -15,13 +12,5 @@ export function DashboardPage() {
     return null;
   }
 
-  return (
-    <div className="space-y-8">
-      <StatsGrid stats={data.stats} />
-
-      <DashboardCharts />
-
-      <DashboardBottom />
-    </div>
-  );
+  return <div className="space-y-8"></div>;
 }

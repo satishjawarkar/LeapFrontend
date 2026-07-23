@@ -1,5 +1,4 @@
 import { HandCoins, Users, Monitor, ArrowRight } from "lucide-react";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../components/ui/form";
 import { DatePicker } from "../../../components/ui/DatePicker";
 import { useState } from "react";
 
@@ -10,7 +9,7 @@ const MODULES = [
 ];
 
 export function HomePage() {
-  const [dob,setDob]=useState<Date | null>(null);
+  const [dob, setDob] = useState<Date | null>(null);
   return (
     <div className="p-6">
       <h2 className="mb-4 text-base font-semibold text-slate-800">Modules</h2>

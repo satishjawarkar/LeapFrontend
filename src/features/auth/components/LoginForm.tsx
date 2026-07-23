@@ -1,14 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Mail } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RefreshCw } from "lucide-react";
 import { useState } from "react";
 import { PasswordInput } from "./PasswordInput";
 
 import { loginSchema, type LoginFormData } from "../schemas/login.schema";
 
-import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 
 import {
@@ -20,6 +19,7 @@ import {
   FormMessage,
 } from "../../../components/ui/form";
 import { ForgotPasswordDialog } from "./ForgotPassword";
+import { Button } from "../../../components/ui/button";
 
 const generateCaptcha = () => {
   const characters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
@@ -207,10 +207,10 @@ export function LoginForm() {
         />
 
         {/* OPTIONS */}
-       {/* OPTIONS */}
-<div className="flex items-center justify-between gap-4 pt-1">
-  <ForgotPasswordDialog />
-</div>
+        {/* OPTIONS */}
+        <div className="flex items-center justify-between gap-4 pt-1">
+          <ForgotPasswordDialog />
+        </div>
 
         {/* LOGIN BUTTON */}
         <Button
