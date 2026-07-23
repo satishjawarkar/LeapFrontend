@@ -1,4 +1,3 @@
-import { Logo } from "../../../components/common/Logo";
 import heroImage from "../../../assets/Main_NBCGDC-logo.png";
 export function BrandPanel() {
   return (
@@ -26,8 +25,6 @@ export function BrandPanel() {
         "
       >
         <img src={heroImage} alt="Leap Logo" />
-
-        {/* ---------------- Footer ---------------- */}
       </div>
     </div>
   );
