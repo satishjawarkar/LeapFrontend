@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CalendarProps {
@@ -34,6 +33,11 @@ function isDateDisabled(date: Date, minDate?: Date, maxDate?: Date) {
 export function Calendar({ selected, onSelect, minDate, maxDate, className }: CalendarProps) {
   const [viewDate, setViewDate] = useState(selected ?? new Date());
 
+  // agar bahar se selected date badle (manual input se), calendar view bhi sync ho
+  useEffect(() => {
+    if (selected) setViewDate(selected);
+  }, [selected]);
+
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
 
@@ -45,22 +49,22 @@ export function Calendar({ selected, onSelect, minDate, maxDate, className }: Ca
   const goToPrevMonth = () => setViewDate(new Date(year, month - 1, 1));
   const goToNextMonth = () => setViewDate(new Date(year, month + 1, 1));
 
+  const handleMonthChange = (newMonth: number) => {
+    setViewDate(new Date(year, newMonth, 1));
+  };
+
+  const handleYearChange = (newYear: number) => {
+    setViewDate(new Date(newYear, month, 1));
+  };
+
   const cells: { date: Date; currentMonth: boolean }[] = [];
 
-  // Previous month's trailing days
   for (let i = startWeekday - 1; i >= 0; i--) {
-    cells.push({
-      date: new Date(year, month - 1, daysInPrevMonth - i),
-      currentMonth: false,
-    });
+    cells.push({ date: new Date(year, month - 1, daysInPrevMonth - i), currentMonth: false });
   }
-
-  // Current month days
   for (let d = 1; d <= daysInMonth; d++) {
     cells.push({ date: new Date(year, month, d), currentMonth: true });
   }
-
-  // Next month's leading days (fill to complete last week)
   const remaining = 7 - (cells.length % 7);
   if (remaining < 7) {
     for (let d = 1; d <= remaining; d++) {
@@ -70,26 +74,80 @@ export function Calendar({ selected, onSelect, minDate, maxDate, className }: Ca
 
   const today = new Date();
 
+  // Year range: minDate se maxDate tak, ya default current year ke +/- 100 saal (DOB use case ke liye)
+  const yearRangeStart = minDate ? minDate.getFullYear() : today.getFullYear() - 100;
+  const yearRangeEnd = maxDate ? maxDate.getFullYear() : today.getFullYear() + 10;
+  const yearOptions: number[] = [];
+  for (let y = yearRangeEnd; y >= yearRangeStart; y--) yearOptions.push(y);
+
   return (
     <div className={`w-[280px] rounded-xl border border-slate-200 bg-white p-4 shadow-sm ${className ?? ""}`}>
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between gap-1">
         <button
           type="button"
           onClick={goToPrevMonth}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
 
-        <span className="text-sm font-semibold text-[#123B6D]">
-          {MONTH_NAMES[month]} {year}
-        </span>
+        <div className="flex items-center gap-1">
+          {/* Month select */}
+          <select
+            value={month}
+            onChange={(e) => handleMonthChange(Number(e.target.value))}
+            className="
+              cursor-pointer
+              rounded-md
+              border-none
+              bg-transparent
+              px-1
+              py-1
+              text-sm
+              font-semibold
+              text-[#123B6D]
+              outline-none
+              hover:bg-slate-100
+            "
+          >
+            {MONTH_NAMES.map((name, idx) => (
+              <option key={name} value={idx}>
+                {name}
+              </option>
+            ))}
+          </select>
+
+          {/* Year select */}
+          <select
+            value={year}
+            onChange={(e) => handleYearChange(Number(e.target.value))}
+            className="
+              cursor-pointer
+              rounded-md
+              border-none
+              bg-transparent
+              px-1
+              py-1
+              text-sm
+              font-semibold
+              text-[#123B6D]
+              outline-none
+              hover:bg-slate-100
+            "
+          >
+            {yearOptions.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <button
           type="button"
           onClick={goToNextMonth}
-          className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100"
         >
           <ChevronRight className="h-4 w-4" />
         </button>
