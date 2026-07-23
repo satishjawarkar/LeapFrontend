@@ -14,7 +14,11 @@ export function Header() {
     <header className="flex h-16 shrink-0 items-stretch bg-[#0669b2] text-white shadow-sm">
       {/* Logo */}
       <NavLink to="/" className="flex items-center gap-2 px-5">
-        <img src={heroImage} alt="Leap" className="h-8 w-8 object-contain" />
+        <img
+          src={heroImage}
+          alt="Leap"
+          className="h-[200px] w-[138px] object-contain"
+        />
 
         {/* <div className="leading-tight">
           <p
