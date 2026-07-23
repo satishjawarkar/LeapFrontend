@@ -1,4 +1,7 @@
 import { HandCoins, Users, Monitor, ArrowRight } from "lucide-react";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../../components/ui/form";
+import { DatePicker } from "../../../components/ui/DatePicker";
+import { useState } from "react";
 
 const MODULES = [
   { id: "loan", label: "Loan", icon: HandCoins },
@@ -7,6 +10,7 @@ const MODULES = [
 ];
 
 export function HomePage() {
+  const [dob,setDob]=useState<Date | null>(null);
   return (
     <div className="p-6">
       <h2 className="mb-4 text-base font-semibold text-slate-800">Modules</h2>
@@ -47,7 +51,9 @@ export function HomePage() {
           Add Announcement
         </button>
       </div>
-
+      <div>
+        <DatePicker value={dob} onChange={setDob} maxDate={new Date()} />
+      </div>
       <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
