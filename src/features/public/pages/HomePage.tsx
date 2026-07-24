@@ -1,15 +1,18 @@
 import { HandCoins, Users, Monitor, ArrowRight } from "lucide-react";
-import { DatePicker } from "../../../components/ui/DatePicker";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { DatePicker } from "../../../components/ui/DatePicker";
 
 const MODULES = [
-  { id: "loan", label: "Loan", icon: HandCoins },
-  { id: "hr", label: "HR", icon: Users },
-  { id: "mis", label: "MIS", icon: Monitor },
+  { id: "loan", label: "Loan", icon: HandCoins, path: "/loan" },
+  { id: "hr", label: "HR", icon: Users, path: "/hr" },
+  { id: "mis", label: "MIS", icon: Monitor, path: "/mis" },
 ];
 
 export function HomePage() {
   const [dob, setDob] = useState<Date | null>(null);
+  const navigate = useNavigate();
+
   return (
     <div className="p-6">
       <h2 className="mb-4 text-base font-semibold text-slate-800">Modules</h2>
@@ -22,6 +25,7 @@ export function HomePage() {
             <button
               key={mod.id}
               type="button"
+              onClick={() => navigate(mod.path)}
               className="group relative flex items-center gap-4 overflow-hidden rounded-lg bg-gradient-to-r from-[#0f8fa8] to-[#0669b2] px-6 py-5 text-left text-white shadow-sm transition hover:shadow-md"
             >
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
@@ -50,13 +54,18 @@ export function HomePage() {
           Add Announcement
         </button>
       </div>
-      
+
       <div className="mt-4 rounded-lg border border-slate-200 bg-white p-5 shadow-sm">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div>
             <label className="mb-1 block text-sm text-slate-600">DOB</label>
-        <DatePicker className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-500 focus:border-[#0669b2] focus:outline-none" value={dob} onChange={setDob} maxDate={new Date()} />
-      </div>
+            <DatePicker
+              className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-slate-500 focus:border-[#0669b2] focus:outline-none"
+              value={dob}
+              onChange={setDob}
+              maxDate={new Date()}
+            />
+          </div>
           <div>
             <label className="mb-1 block text-sm text-slate-600">
               Financial Year

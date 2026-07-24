@@ -6,10 +6,9 @@ import heroImage from "../../../assets/hero.png";
 import { useSidebar } from "../sidebar/SidebarContext";
 
 export function Header() {
-  const { toggleSidebar } = useSidebar();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-
+  const { toggleSidebar, sidebarType } = useSidebar();
   return (
     <header className="flex h-16 shrink-0 items-stretch bg-[#0669b2] text-white shadow-sm">
       {/* Logo */}

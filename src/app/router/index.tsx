@@ -66,6 +66,38 @@ export const router = createBrowserRouter([
         path: "setup/course-setup",
         element: <SetupPlaceholderPage />,
       },
+      {
+        path: "announcements",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "hr",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "mis",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "loan",
+        element: <Navigate to="/loan/apply" replace />,
+      },
+      {
+        path: "loan/apply",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "loan/applications",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "loan/disbursement",
+        element: <SetupPlaceholderPage />,
+      },
+      {
+        path: "loan/reports",
+        element: <SetupPlaceholderPage />,
+      },
     ],
   },
   {
